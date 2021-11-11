@@ -20,6 +20,8 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "33061:3306"
     command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
       - ./database/mysql-data:/var/lib/mysql:rw
