@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\DB;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -13,6 +14,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'api/v1'], function () use ($router){
+    $router->post('/access', 'AuthController@login');
+
+    //$router->get('/group', 'GroupController@index');
 });
