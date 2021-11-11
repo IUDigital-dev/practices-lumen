@@ -1,4 +1,4 @@
-# Instrucciones para configurar un entorno local sin Docker
+# Instrucciones para configurar un entorno local con Docker
 Para configurar la aplicación localmente necesita
 - Docker
 - Docker Compose
