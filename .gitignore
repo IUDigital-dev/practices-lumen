@@ -1,6 +1,6 @@
 /vendor
 /.idea
-database/mysql-data
+mysql-data
 Homestead.json
 Homestead.yaml
 .env
