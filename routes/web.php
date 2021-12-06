@@ -26,17 +26,8 @@ $router->get('/course', function () use ($router) {
     return $router->app->version();
 });
 
-
-$router->get('/list', 'CourseController@all');
-$router->get('/list/{cursoId}', 'CourseController@find');
-$router->post('/create', 'CourseController@create');
-
-
-// $app->group(['prefix' => 'admin'], function () use ($app) {
-//     $app->get('users', function () {
-//         // Matches The "/admin/users" URL
-//     });
-//     $app->get('users', function () {
-//         // Matches The "/admin/users" URL
-//     });
-// });
+$router->group(['prefix' => 'course'], function () use ($router) {
+    $router->get('/all', 'CourseController@all');
+    $router->get('/find/{cursoId}', 'CourseController@find');
+    $router->get('/create', 'CourseController@create');
+});
