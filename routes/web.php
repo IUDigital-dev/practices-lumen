@@ -27,7 +27,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router){
 // $router->post('/categories', 'CategoriesController@createCategories');
 $router->get('/courses', 'CoursesController@index');
 $router->get('/courses/{cursoId}', 'CoursesController@search');
-$router->put('/courses/{cursoId}','CoursesController@updateCourses');
+$router->post('/courses/{cursoId}','CoursesController@updateCourses');
 $router->delete('/courses/{cursoId}','CoursesController@destroydelete');
 
 
