@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Courses;
 
-class CoursesController extends Controller
+class CourseController extends Controller
 {
     public function all()
     {
@@ -17,7 +17,7 @@ class CoursesController extends Controller
         return Courses::findOrFail($cursoId)->toJson();
     }
 
-    public function createCourse(Request $request)
+    public function create(Request $request)
     {
         $data = new Courses;
 

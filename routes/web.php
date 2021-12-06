@@ -27,9 +27,9 @@ $router->get('/course', function () use ($router) {
 });
 
 
-$router->get('/list', 'CoursesController@all');
-$router->get('/list/{cursoId}', 'CoursesController@find');
-$router->post('/create', 'CoursesController@createCourse');
+$router->get('/list', 'CourseController@all');
+$router->get('/list/{cursoId}', 'CourseController@find');
+$router->post('/create', 'CourseController@create');
 
 
 // $app->group(['prefix' => 'admin'], function () use ($app) {
