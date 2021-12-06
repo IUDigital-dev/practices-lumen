@@ -17,3 +17,4 @@ class Courses extends Model{
 
     public $timestamps = false;
 }
+
