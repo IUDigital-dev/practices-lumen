@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ListCourses;
+use App\Models\Courses;
 
-class ListCoursesController extends Controller
+class CoursesController extends Controller
 {
     public function listCourses()
     {
-        return listCourses::all();
+        return Courses::all();
     }
 
     public function listOneCourse($cursoId)
@@ -17,6 +17,6 @@ class ListCoursesController extends Controller
         // $dataCourse = new ListCourses;
         // $listOneCourse = $dataCourse->find($cursoId);
         // return response()->json($listOneCourse);
-        return ListCourses::findOrFail($cursoId);
+        return Courses::findOrFail($cursoId);
     }
 }

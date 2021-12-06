@@ -29,6 +29,6 @@ $router->get('/course', function () use ($router) {
 // $router->get('/c_curso', 'CourseController@prueba');
 // $router->get('/hola', 'HolaController@prueba'); //prueba para validar conexión
 // $router->get('/pio', 'CourseController@prueba');
-$router->get('/list', 'ListCoursesController@listCourses');
-$router->get('/list/{cursoId}', 'ListCoursesController@listOneCourse');
+$router->get('/list', 'CoursesController@listCourses');
+$router->get('/list/{cursoId}', 'CoursesController@listOneCourse');
 // $router->get('list/{cursoId}', ['as' => 'ListCourses.listOneCourse', 'uses' => 'ListCoursesController@listOneCourse']);
