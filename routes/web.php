@@ -26,9 +26,17 @@ $router->get('/course', function () use ($router) {
     return $router->app->version();
 });
 
-// $router->get('/c_curso', 'CourseController@prueba');
-// $router->get('/hola', 'HolaController@prueba'); //prueba para validar conexión
-// $router->get('/pio', 'CourseController@prueba');
-$router->get('/list', 'CoursesController@listCourses');
-$router->get('/list/{cursoId}', 'CoursesController@listOneCourse');
-// $router->get('list/{cursoId}', ['as' => 'ListCourses.listOneCourse', 'uses' => 'ListCoursesController@listOneCourse']);
+
+$router->get('/list', 'CoursesController@all');
+$router->get('/list/{cursoId}', 'CoursesController@find');
+$router->post('/create', 'CoursesController@createCourse');
+
+
+// $app->group(['prefix' => 'admin'], function () use ($app) {
+//     $app->get('users', function () {
+//         // Matches The "/admin/users" URL
+//     });
+//     $app->get('users', function () {
+//         // Matches The "/admin/users" URL
+//     });
+// });
