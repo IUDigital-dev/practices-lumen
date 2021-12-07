@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Services\Implementation\CourseServiceImpl;
+use App\Validator\CourseValidator;
 
 class CourseController extends Controller
 {
@@ -16,11 +17,16 @@ class CourseController extends Controller
      * @var Request
      */
     private $request;
+    /**
+     * @var CourseValidator;
+     */
+    private $validator;
 
-    public function __construct(CourseServiceImpl $courseService, Request $request)
+    public function __construct(CourseServiceImpl $courseService, Request $request, CourseValidator $courseValidator)
     {
         $this->courseService = $courseService;
         $this->request = $request;
+        $this->validator = $courseValidator;
     }
 
     function create()
