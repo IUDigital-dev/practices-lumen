@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Course;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -24,9 +24,15 @@ $router->group(['prefix' => 'api/v1/'], function () use ($router){
     $router->group([
         'middleware' => 'auth',
     ], function() use ($router) {
-
        $router->get('users', function () {
            return User::all()->toJson();
        });
     });
+});
+
+$router->group(['prefix' => 'course'], function () use ($router) {
+
+    $router->get('/', 'CourseController@all');
+    $router->get('/find/{cursoId}', 'CourseController@find');
+    $router->post('/create', 'CourseController@create');
 });
