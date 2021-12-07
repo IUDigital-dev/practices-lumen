@@ -33,6 +33,7 @@ class CourseValidator
             "horas" => "required",
             "texto1" => "required",
             "texto2" => "required",
+            "texto3" => "required",
             "url_encuesta" => "required"
         ];
     }
