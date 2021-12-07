@@ -24,7 +24,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
 $router->group(['prefix' => 'course'], function () use ($router) {
 
-    $router->get('/all', 'CourseController@all');
+    $router->get('/', 'CourseController@all');
     $router->get('/find/{cursoId}', 'CourseController@find');
     $router->post('/create', 'CourseController@create');
 });

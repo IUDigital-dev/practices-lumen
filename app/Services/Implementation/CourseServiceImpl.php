@@ -2,22 +2,23 @@
 
 namespace App\Services\Implementation;
 
-use App\Models\Courses;
+use App\Models\Course;
 use App\Services\Interfaces\CourseServiceInterface;
+use Illuminate\Support\Collection;
 
 class CourseServiceImpl implements CourseServiceInterface
 {
-    private $model;
+    private Course $model;
 
-    function __construct()
+    function __construct(Course $course)
     {
-        $this->model = new Courses();
+        $this->model = $course;
     }
 
     /**
      *list all courses
      */
-    function getAll()
+    function getAll() : Collection
     {
         return $this->model->get();
     }
@@ -25,7 +26,7 @@ class CourseServiceImpl implements CourseServiceInterface
     /**
      *find course
      */
-    function find(int $cursoId)
+    function find(int $cursoId) : ?Course
     {
         return $this->model->findOrFail($cursoId);
     }
@@ -33,8 +34,8 @@ class CourseServiceImpl implements CourseServiceInterface
     /**
      *create a new course
      */
-    function postCreate(array $c_curso)
+    function postCreate(array $c_curso) : ?Course
     {
-        $this->model->create($c_curso);
+        return $this->model->create($c_curso);
     }
 }

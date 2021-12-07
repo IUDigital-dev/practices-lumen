@@ -11,7 +11,7 @@ class CourseController extends Controller
     /**
      * @var CourseServiceImpl
      */
-    private $courseService;
+    private CourseServiceImpl $courseService;
 
     public function __construct(CourseServiceImpl $courseService)
     {
@@ -20,6 +20,7 @@ class CourseController extends Controller
 
     function create(Request $request, CourseValidator $courseValidator)
     {
+
         $validator = $courseValidator->validate();
         if ($validator->fails()) {
             return response([
@@ -29,20 +30,36 @@ class CourseController extends Controller
             ], 422);
         }
 
-        $this->courseService->postCreate($request->all());
-        return response([
-            "status" => 201,
-            "message" => "Course Created",
-        ], 201);
+        try {
+            $this->courseService->postCreate($request->all());
+            return response([
+                "status" => 201,
+                "message" => "Course Created",
+            ], 201);
+
+        } catch (\Exception $exception) {
+            return response([
+                "status" => 500,
+                "message" => $exception->getMessage(),
+            ], 500);
+        }
     }
 
     function all()
     {
-        return response($this->courseService->getAll());
+        return response([
+            "status" => 200,
+            "message" => "All courses",
+            "data" => $this->courseService->getAll()
+        ], 200);
     }
 
     function find($cursoId)
     {
-        return response($this->courseService->find($cursoId));
+        return response([
+            "status" => 200,
+            "message" => "Course with ID {$cursoId}",
+            "data" => $this->courseService->find($cursoId)
+        ], 200);
     }
 }
