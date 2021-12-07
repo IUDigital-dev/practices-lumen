@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Courses;
+use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use Laravel\Lumen\Routing\Router;
 
@@ -25,11 +25,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router){
 
 
 // $router->post('/categories', 'CategoriesController@createCategories');
-$router->get('/courses', 'CoursesController@index');
-$router->get('/courses/{cursoId}', 'CoursesController@search');
-$router->post('/courses/{cursoId}','CoursesController@updateCourses');
-$router->delete('/courses/{cursoId}','CoursesController@destroydelete');
-
+$router->group(['prefix' => 'courses'], function () use ($router){
+    $router->post('/{cursoId}/update','CourseController@update');
+    $router->delete('/{cursoId}/delete','CourseController@delete');
+});
 
 
 
