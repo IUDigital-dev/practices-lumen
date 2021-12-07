@@ -19,5 +19,5 @@ interface CourseServiceInterface
      * @param array $user
      * @return void
      */
-    function postCreate();
+    function postCreate(array $c_curso);
 }

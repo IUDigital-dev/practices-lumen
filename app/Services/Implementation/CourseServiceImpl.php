@@ -20,7 +20,11 @@ class CourseServiceImpl implements CourseServiceInterface
     function getFind(int $cursoId)
     {
     }
-    function postCreate()
+    /**
+     *create a new course
+     */
+    function postCreate(array $c_curso)
     {
+        $this->model->create($c_curso);
     }
 }

@@ -24,6 +24,15 @@ class CourseController extends Controller
         $this->courseService = $courseService;
         $this->request = $request;
     }
+
+    function create()
+    {
+        $response = response("", 201);
+
+        $this->courseService->postCreate($this->request->all());
+
+        return $response;
+    }
 }
 
 
