@@ -8,7 +8,7 @@ class Course extends Model{
 
     protected $primaryKey = 'cursoId';
 
-    protected $fillable = ['cursoId','codigoCurso','nombreCurso'];
+    protected $fillable = ['cursoId','codigoCurso','nombreCurso', 'nombreCurso2','plantillasId','horas','texto1','texto2','texto3','url_encuesta'];
     // protected $hidden = ['created_at','updated_at','nombreCurso2','plantillasId','horas','texto1','texto2','texto3','url_encuesta'];
 
 

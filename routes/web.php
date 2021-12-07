@@ -26,7 +26,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router){
 
 // $router->post('/categories', 'CategoriesController@createCategories');
 $router->group(['prefix' => 'courses'], function () use ($router){
-    $router->post('/{cursoId}/update','CourseController@update');
+    $router->put('/{cursoId}/update','CourseController@update');
     $router->delete('/{cursoId}/delete','CourseController@delete');
 });
 

@@ -13,11 +13,10 @@ class CourseController extends Controller{
 
         // Se puede refactorizar mejor esto.
         $this->validate($request,[
-            'cursoId' => 'required|unique:c_curso,cursoId',
             'codigoCurso' => 'required',
             'nombreCurso' => 'required',
             'nombreCurso2' => 'required',
-            'plantillaId' => 'required|unique:c_plantilla,plantillaId',
+            'plantillaId' => 'required|exists:c_plantilla,plantillaId',
             'horas' => 'required',
             'texto1' => 'required',
             'url_encuesta'=> 'required'
