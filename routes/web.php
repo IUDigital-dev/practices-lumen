@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ListCourses;
+use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
@@ -27,7 +27,8 @@ $router->get('/course', function () use ($router) {
 });
 
 $router->group(['prefix' => 'course'], function () use ($router) {
+
     $router->get('/all', 'CourseController@all');
     $router->get('/find/{cursoId}', 'CourseController@find');
-    $router->get('/create', 'CourseController@create');
+    $router->post('/create', 'CourseController@create');
 });
