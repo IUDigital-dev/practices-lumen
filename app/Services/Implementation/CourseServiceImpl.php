@@ -14,13 +14,22 @@ class CourseServiceImpl implements CourseServiceInterface
         $this->model = new Courses();
     }
 
+    /**
+     *list all courses
+     */
     function getAll()
     {
         return $this->model->get();
     }
+
+    /**
+     *find course
+     */
     function getFind(int $cursoId)
     {
+        return $this->model->get();
     }
+
     /**
      *create a new course
      */

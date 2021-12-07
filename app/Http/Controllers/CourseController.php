@@ -36,8 +36,13 @@ class CourseController extends Controller
     {
         return response($this->courseService->getAll());
     }
-}
 
+    function find($cursoId)
+    {
+        $response = Courses::findOrFail($cursoId);
+        return $response;
+    }
+}
 
 
 
