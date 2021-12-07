@@ -33,8 +33,16 @@ class CourseController extends Controller
     {
         $response = response("", 201);
 
-        $this->courseService->postCreate($this->request->all());
-
+        $validator = $this->validator->validate();
+        if ($validator->fails()) {
+            $response = response([
+                "status" => 422,
+                "message" => "Error",
+                "error" => $validator->errors()
+            ], 422);
+        } else {
+            $this->courseService->postCreate($this->request->all());
+        }
         return $response;
     }
 

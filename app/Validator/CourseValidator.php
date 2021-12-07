@@ -18,7 +18,7 @@ class CourseValidator
         $this->request = $request;
     }
 
-    public function validation()
+    public function validate()
     {
         return Validator::make($this->request->all(), $this->rules(), $this->messages());
     }
