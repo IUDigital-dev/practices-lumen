@@ -4,10 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Courses;
+use App\Services\Implementation\CourseServiceImpl;
 
 class CourseController extends Controller
 {
+    //inyectar nuestra implementación
 
+    /**
+     * @var CourseServiceImpl
+     */
+    private $courseService;
+    /**
+     * @var Request
+     */
+    private $request;
+
+    public function __construct(CourseServiceImpl $courseService, Request $request)
+    {
+        $this->courseService = $courseService;
+        $this->request = $request;
+    }
+}
 
 
 
@@ -57,4 +74,3 @@ class CourseController extends Controller
     // //         'res' => true,
     // //         'message' => 'Registro insertado correctamente'
     // //     ]);
-}
