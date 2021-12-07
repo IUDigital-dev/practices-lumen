@@ -13,7 +13,7 @@ interface CourseServiceInterface
      * @param int $cursoId
      * @return Course
      */
-    function getFind(int $cursoId);
+    function find(int $cursoId);
 
     /**
      * @param array $user

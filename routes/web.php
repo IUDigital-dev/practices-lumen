@@ -22,10 +22,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     //$router->get('/group', 'GroupController@index');
 });
 
-$router->get('/course', function () use ($router) {
-    return $router->app->version();
-});
-
 $router->group(['prefix' => 'course'], function () use ($router) {
 
     $router->get('/all', 'CourseController@all');

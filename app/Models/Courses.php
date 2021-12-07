@@ -20,6 +20,4 @@ class Courses extends Model
         'url_encuesta',
     ];
     public $timestamps = false;
-
-    // public $timestamps = false;
 }

@@ -25,9 +25,9 @@ class CourseServiceImpl implements CourseServiceInterface
     /**
      *find course
      */
-    function getFind(int $cursoId)
+    function find(int $cursoId)
     {
-        return $this->model->get();
+        return $this->model->findOrFail($cursoId);
     }
 
     /**

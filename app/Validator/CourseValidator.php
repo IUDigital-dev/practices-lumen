@@ -11,7 +11,7 @@ class CourseValidator
     /**
      * @var Request
      */
-    private $reques;
+    private $request;
 
     public function __construct(Request $request)
     {
@@ -33,7 +33,6 @@ class CourseValidator
             "horas" => "required",
             "texto1" => "required",
             "texto2" => "required",
-
             "url_encuesta" => "required"
         ];
     }
