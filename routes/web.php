@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
@@ -14,8 +16,17 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-$router->group(['prefix' => 'api/v1'], function () use ($router){
-    $router->post('/access', 'AuthController@login');
+$router->group(['prefix' => 'api/v1/'], function () use ($router){
+    $router->post('login', 'AuthController@login');
+    $router->post('logout', 'AuthController@logout');
+    $router->post('refresh', 'AuthController@refresh');
+    $router->post('me', 'AuthController@me');
+    $router->group([
+        'middleware' => 'auth',
+    ], function() use ($router) {
 
-    //$router->get('/group', 'GroupController@index');
+       $router->get('users', function () {
+           return User::all()->toJson();
+       });
+    });
 });
