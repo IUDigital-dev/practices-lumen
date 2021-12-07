@@ -26,14 +26,14 @@ class CourseValidator
     private function rules()
     {
         return [
-            "codigoCurso" => "required",
+            "codigoCurso" => "required|unique:c_curso,codigoCurso",
             "nombreCurso" => "required",
             "nombreCurso2" => "required",
             "plantillaId" => "required",
             "horas" => "required",
             "texto1" => "required",
             "texto2" => "required",
-            "texto3" => "required",
+
             "url_encuesta" => "required"
         ];
     }
