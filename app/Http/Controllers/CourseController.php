@@ -8,8 +8,6 @@ use App\Services\Implementation\CourseServiceImpl;
 
 class CourseController extends Controller
 {
-    //inyectar nuestra implementación
-
     /**
      * @var CourseServiceImpl
      */
@@ -32,6 +30,11 @@ class CourseController extends Controller
         $this->courseService->postCreate($this->request->all());
 
         return $response;
+    }
+
+    function all()
+    {
+        return response($this->courseService->getAll());
     }
 }
 

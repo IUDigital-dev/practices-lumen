@@ -16,6 +16,7 @@ class CourseServiceImpl implements CourseServiceInterface
 
     function getAll()
     {
+        return $this->model->get();
     }
     function getFind(int $cursoId)
     {
