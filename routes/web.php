@@ -38,5 +38,4 @@ $router->group(['prefix' => 'course'], function () use ($router) {
 
 $router->group(['prefix' => 'template'], function () use ($router) {
     $router->post('/create', 'TemplateController@create');
-    $router->get('/', 'TemplateController@all');
 });
