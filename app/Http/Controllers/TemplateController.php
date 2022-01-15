@@ -61,4 +61,13 @@ class TemplateController extends Controller
             ], 500);
         }
     }
+
+    function all()
+    {
+        return response([
+            "status" => 200,
+            "message" => "All courses",
+            "data" => $this->templateService->getAll()
+        ], 200);
+    }
 }

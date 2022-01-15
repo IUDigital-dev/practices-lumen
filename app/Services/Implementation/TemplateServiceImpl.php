@@ -25,8 +25,9 @@ class TemplateServiceImpl implements TemplateServiceInterface
     /**
      * List all template
      */
-    function getAll()
+    function getAll(): Collection
     {
+        return $this->model->get();
     }
 
     /**
@@ -39,14 +40,14 @@ class TemplateServiceImpl implements TemplateServiceInterface
     /**
      * create a new template
      */
-    function create(array $c_plantilla)
+    function create(array $c_plantilla): ?Template
     {
         if ($this->request->hasFile('imgCertificado')) {
             $nameImg = Carbon::now()->timestamp . "_" . $this->request->file('imgCertificado')->getClientOriginalName();
             $folder = './imgCertificate/';
             $this->request->file('imgCertificado')->move($folder, $nameImg);
             $c_plantilla['imgCertificado'] = $nameImg;
-            $this->model->create($c_plantilla);
+            return $this->model->create($c_plantilla);
         }
     }
 
