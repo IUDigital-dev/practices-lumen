@@ -6,6 +6,7 @@ use App\Services\Implementation\TemplateServiceImpl;
 use App\Validator\TemplateValidator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TemplateController extends Controller
 {
@@ -69,5 +70,27 @@ class TemplateController extends Controller
             "message" => "All courses",
             "data" => $this->templateService->getAll()
         ], 200);
+    }
+
+    function find($plantillaId)
+    {
+        if ($this->templateService->find($plantillaId) == null) {
+            return response([
+                "status" => 404,
+                "message" => "ID doesn't exist"
+            ], 200);
+        }
+        try {
+            return response([
+                "status" => 200,
+                "message" => "Template with ID {$plantillaId}",
+                "data" => $this->templateService->find($plantillaId)
+            ], 200);
+        } catch (\Exception $exception) {
+            return response([
+                "status" => 500,
+                "message" => $exception->getMessage()
+            ], 500);
+        }
     }
 }

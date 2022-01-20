@@ -33,9 +33,11 @@ class TemplateServiceImpl implements TemplateServiceInterface
     /**
      * Find template
      */
-    function find(int $plantillaId)
+    function find(int $plantillaId): ?Template
     {
+        return $this->model->find($plantillaId);
     }
+
 
     /**
      * create a new template

@@ -39,4 +39,5 @@ $router->group(['prefix' => 'course'], function () use ($router) {
 $router->group(['prefix' => 'template'], function () use ($router) {
     $router->post('/create', 'TemplateController@create');
     $router->get('/all', 'TemplateController@all');
+    $router->get('/find/{plantillaId}', 'TemplateController@find');
 });
