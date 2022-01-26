@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Implementation\TemplateServiceImpl;
 use App\Validator\TemplateValidator;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TemplateController extends Controller
 {
@@ -47,6 +45,16 @@ class TemplateController extends Controller
             ], 422);
         }
 
+        if ($this->request->has("imgCertificado") == true) {
+            $nameImg = $this->request->file('imgCertificado')->getClientOriginalName();
+            if (strlen($nameImg) > 22) {
+                return response([
+                    "status" => 422,
+                    "message" => "The file image name must be no longer than 22 characters.",
+                ], 422);
+            }
+        }
+
         try {
 
             $this->templateService->create($this->request->all());
@@ -62,6 +70,7 @@ class TemplateController extends Controller
             ], 500);
         }
     }
+
 
     function all()
     {

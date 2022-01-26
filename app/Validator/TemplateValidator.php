@@ -27,7 +27,7 @@ class TemplateValidator
     {
         return [
             "nombrePlantilla" => "required",
-            "imgCertificado" => "required",
+            "imgCertificado" => "required|image:jpg, jpeg, png, bmp, gif, svg, webp",
         ];
     }
 

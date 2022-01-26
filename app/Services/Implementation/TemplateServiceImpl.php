@@ -4,7 +4,6 @@ namespace App\Services\Implementation;
 
 use App\Models\Template;
 use App\Services\Interfaces\TemplateServiceInterface;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -42,15 +41,19 @@ class TemplateServiceImpl implements TemplateServiceInterface
     /**
      * create a new template
      */
-    function create(array $c_plantilla): ?Template
+    function create(array $c_plantilla)
     {
-        if ($this->request->hasFile('imgCertificado')) {
-            $nameImg = Carbon::now()->timestamp . "_" . $this->request->file('imgCertificado')->getClientOriginalName();
-            $folder = './imgCertificate/';
-            $this->request->file('imgCertificado')->move($folder, $nameImg);
-            $c_plantilla['imgCertificado'] = $nameImg;
-            return $this->model->create($c_plantilla);
-        }
+        $newId =  $this->model->create($c_plantilla);
+        $plantillaId = $newId['plantillaId'];
+
+        $nameImg = $plantillaId . "_" . $this->request->file('imgCertificado')->getClientOriginalName();
+        $folder = './imgCertificate/';
+        $this->request->file('imgCertificado')->move($folder, $nameImg);
+        $c_plantilla['imgCertificado'] = $nameImg;
+        return $this->model->where('plantillaId', $plantillaId)
+            ->first()
+            ->fill($c_plantilla)
+            ->save();
     }
 
     /**
