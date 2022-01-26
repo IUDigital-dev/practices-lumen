@@ -40,4 +40,5 @@ $router->group(['prefix' => 'template'], function () use ($router) {
     $router->post('/create', 'TemplateController@create');
     $router->get('/all', 'TemplateController@all');
     $router->get('/find/{plantillaId}', 'TemplateController@find');
+    $router->post('/update/{plantillaId}', 'TemplateController@update');
 });

@@ -61,6 +61,40 @@ class TemplateServiceImpl implements TemplateServiceInterface
      */
     function update(array $c_plantilla, int $plantillaId)
     {
+
+        $template = $this->model->where('plantillaId', $plantillaId)->first();
+
+        if ($this->request->has("imgCertificado") == null) {
+            $template->nombrePlantilla = $this->request->nombrePlantilla;
+            $template->save();
+        } else if ($c_plantilla['nombrePlantilla'] == null) {
+            $urlImg = base_path('public/imgCertificate/') . $template->imgCertificado;
+            if (file_exists($urlImg)) {
+                unlink($urlImg);
+            }
+            $nameImg = $plantillaId . "_" . $this->request->file('imgCertificado')->getClientOriginalName();
+            $folder = './imgCertificate/';
+            $this->request->file('imgCertificado')->move($folder, $nameImg);
+
+            $c_plantilla['imgCertificado'] = $nameImg;
+            $template->imgCertificado = $nameImg;
+            $template->save();
+        } else {
+
+            $template = $this->model->where('plantillaId', $plantillaId)->first();
+            $urlImg = base_path('public/imgCertificate/') . $template->imgCertificado;
+            if (file_exists($urlImg)) {
+                unlink($urlImg);
+            }
+            $nameImg = $plantillaId . "_" . $this->request->file('imgCertificado')->getClientOriginalName();
+            $folder = './imgCertificate/';
+            $this->request->file('imgCertificado')->move($folder, $nameImg);
+            $c_plantilla['imgCertificado'] = $nameImg;
+            return $this->model->where('plantillaId', $plantillaId)
+                ->first()
+                ->fill($c_plantilla)
+                ->save();
+        }
     }
 
     /**
