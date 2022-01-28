@@ -102,6 +102,10 @@ class TemplateServiceImpl implements TemplateServiceInterface
      */
     function delete(int $plantillaId)
     {
+        $template = $this->model->where('plantillaId', $plantillaId)->first();
+        $urlImg = base_path('public/imgCertificate/') . $template->imgCertificado;
+        unlink($urlImg);
+        $template->delete();
     }
 
     /**

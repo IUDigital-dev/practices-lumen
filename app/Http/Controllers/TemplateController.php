@@ -156,4 +156,26 @@ class TemplateController extends Controller
             }
         }
     }
+
+    function delete($plantillaId)
+    {
+        $exist = $this->templateService->find($plantillaId);
+        if ($exist == null) {
+            return response([
+                "status" => 404,
+                "message" => "Template with ID {$plantillaId} doesn't exist",
+            ], 404);
+        }
+
+        $this->templateService->delete($plantillaId);
+
+        try {
+            return response("", 204);
+        } catch (\Exception $exception) {
+            return response([
+                "status" => 500,
+                "message" => $exception->getMessage()
+            ], 500);
+        }
+    }
 }
