@@ -16,23 +16,30 @@ use App\Models\User;
 |
 */
 
-$router->group(['prefix' => 'api/v1/'], function () use ($router){
+$router->group(['prefix' => 'api/v1/'], function () use ($router) {
     $router->post('login', 'AuthController@login');
     $router->post('logout', 'AuthController@logout');
     $router->post('refresh', 'AuthController@refresh');
     $router->post('me', 'AuthController@me');
     $router->group([
         'middleware' => 'auth',
-    ], function() use ($router) {
-       $router->get('users', function () {
-           return User::all()->toJson();
-       });
+    ], function () use ($router) {
+        $router->get('users', function () {
+            return User::all()->toJson();
+        });
     });
 });
 
 $router->group(['prefix' => 'course'], function () use ($router) {
-
     $router->get('/', 'CourseController@all');
     $router->get('/find/{cursoId}', 'CourseController@find');
     $router->post('/create', 'CourseController@create');
+});
+
+$router->group(['prefix' => 'template'], function () use ($router) {
+    $router->post('/create', 'TemplateController@create');
+    $router->get('/all', 'TemplateController@all');
+    $router->get('/find/{plantillaId}', 'TemplateController@find');
+    $router->post('/update/{plantillaId}', 'TemplateController@update');
+    $router->delete('/delete/{plantillaId}', 'TemplateController@delete');
 });
