@@ -46,16 +46,6 @@ class TemplateController extends Controller
             ], 422);
         }
 
-        if ($this->request->has("imgCertificado") == true) {
-            $nameImg = $this->request->file('imgCertificado')->getClientOriginalName();
-            if (strlen($nameImg) > 22) {
-                return response([
-                    "status" => 422,
-                    "message" => "The file image name must be no longer than 22 characters.",
-                ], 422);
-            }
-        }
-
         try {
 
             $this->templateService->create($this->request->all());
@@ -71,7 +61,6 @@ class TemplateController extends Controller
             ], 500);
         }
     }
-
 
     function all()
     {
@@ -108,54 +97,43 @@ class TemplateController extends Controller
     {
 
         $validator = Validator::make($this->request->all(), [
+            "nombrePlantilla" => "required",
             "imgCertificado" => "image:jpg, jpeg, png, bmp, gif, svg, or webp",
         ]);
 
-        if ($this->request->input("nombrePlantilla") == false &&  $this->request->has("imgCertificado") == false) {
+        if ($validator->fails()) {
             return response([
                 "status" => 422,
-                "message" => "No data entered",
+                "message" => "Error",
+                "error" => $validator->errors(),
             ], 422);
-        } else {
-            if ($validator->fails()) {
-                return response([
-                    "status" => 422,
-                    "message" => "Error",
-                    "error" => $validator->errors(),
-                ], 422);
-            }
+        }
 
-            $exist = $this->templateService->find($plantillaId);
-            if ($exist == null) {
-                return response([
-                    "status" => 404,
-                    "message" => "Template with ID {$plantillaId} doesn't exist",
-                ], 404);
-            }
+        if ($this->templateService->find($plantillaId) == null) {
+            return response([
+                "status" => 404,
+                "message" => "Template with ID {$plantillaId} doesn't exist",
+            ], 404);
+        }
 
+        try {
+            $fileName = null;
             if ($this->request->has("imgCertificado") == true) {
-                $nameImg = $this->request->file('imgCertificado')->getClientOriginalName();
-                if (strlen($nameImg) > 22) {
-                    return response([
-                        "status" => 422,
-                        "message" => "The file image name must be no longer than 22 characters.",
-                    ], 422);
-                }
+                $fileName = \App\Helpers\Helpers::getFileName($this->request->file('imgCertificado')->getClientOriginalName());
             }
-            $this->templateService->update($this->request->all(), $plantillaId);
-            try {
-                return response([
-                    "status" => 202,
-                    "message" => "Template with ID {$plantillaId} update",
-                ], 202);
-            } catch (\Exception $exception) {
-                return response([
-                    "status" => 500,
-                    "message" => $exception->getMessage()
-                ], 500);
-            }
+            $this->templateService->update($plantillaId, $fileName);
+            return response([
+                "status" => 202,
+                "message" => "Template with ID {$plantillaId} update",
+            ], 202);
+        } catch (\Exception $exception) {
+            return response([
+                "status" => 500,
+                "message" => $exception->getMessage()
+            ], 500);
         }
     }
+
 
     function delete($plantillaId)
     {

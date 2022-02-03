@@ -2,6 +2,9 @@
 
 namespace App\Services\Interfaces;
 
+use App\Models\Template;
+use phpDocumentor\Reflection\Types\Boolean;
+
 interface TemplateServiceInterface
 {
     /**
@@ -15,14 +18,14 @@ interface TemplateServiceInterface
      * @param integer $plantillaId
      * @return void
      */
-    function find(int $plantillaId);
+    function find(int $plantillaId): ?Template;
 
     /**
      *
      * @param array $c_plantilla
      * @return void
      */
-    function create(array $c_plantilla);
+    function create(array $c_plantilla): ?Template;
 
     /**
      *
@@ -30,7 +33,7 @@ interface TemplateServiceInterface
      * @param integer $plantillaId
      * @return void
      */
-    function update(array $e_plantilla, int $plantillaId);
+    function update(int $plantillaIdm, ?string $fileName);
 
     /**
      *
