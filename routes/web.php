@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Course;
 use App\Models\User;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
@@ -28,18 +27,4 @@ $router->group(['prefix' => 'api/v1/'], function () use ($router) {
             return User::all()->toJson();
         });
     });
-});
-
-$router->group(['prefix' => 'course'], function () use ($router) {
-    $router->get('/', 'CourseController@all');
-    $router->get('/find/{cursoId}', 'CourseController@find');
-    $router->post('/create', 'CourseController@create');
-});
-
-$router->group(['prefix' => 'template'], function () use ($router) {
-    $router->post('/create', 'TemplateController@create');
-    $router->get('/all', 'TemplateController@all');
-    $router->get('/find/{plantillaId}', 'TemplateController@find');
-    $router->post('/update/{plantillaId}', 'TemplateController@update');
-    $router->delete('/delete/{plantillaId}', 'TemplateController@delete');
 });
